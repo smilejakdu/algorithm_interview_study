@@ -20,25 +20,31 @@ import collections
 Input = ["eat","tea","tan","ate","nat","bat"]
 
 def groupAnagrams(strs: List[str]) -> List[List[str]]:
-    string_list = sorted(strs)
-    string_list = [''.join(sorted(string)) for string in string_list]
-    string_list = collections.Counter(string_list)
-    print(string_list)
-    return
+    string_list    = sorted(strs)
+    string_list    = [''.join(sorted(string)) for string in string_list]
+    string_diction = {}
 
-print(groupAnagrams(Input))
+    for string in string_list:
+        if string not in string_diction:
+            string_diction[string]=[]
+
+    for string in strs:
+        string_diction[''.join(sorted(string))].append(string)
+
+    return list(string_diction.values())
+
 
 
 # 답지 풀이
-import collections
-from typing import List
 
+def groupAnagrams(strs: List[str]) -> List[List[str]]:
+    anagrams = collections.defaultdict(list)
 
-class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        anagrams = collections.defaultdict(list)
+    for word in strs:
+        # 정렬하여 딕셔너리에 추가
+        anagrams[''.join(sorted(word))].append(word)
+    print(anagrams) # defaultdict(<class 'list'>, {'aet': ['eat', 'tea', 'ate'], 'ant': ['tan', 'nat'], 'abt': ['bat']})
+    return list(anagrams.values())
 
-        for word in strs:
-            # 정렬하여 딕셔너리에 추가
-            anagrams[''.join(sorted(word))].append(word)
-        return list(anagrams.values())
+print(groupAnagrams(Input))
+
