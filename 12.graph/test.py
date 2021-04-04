@@ -1,18 +1,21 @@
-import collections
+from typing import List
 
-def solution(numbers, target):
-    answer = 0
-    stack = collections.deque([(0, 0)])
-    while stack:
-        current_sum, num_idx = stack.popleft()
-        if num_idx == len(numbers):
-            if current_sum == target:
-                answer += 1
-        else:
-            number = numbers[num_idx]
-            stack.append((current_sum+number, num_idx + 1))
-            stack.append((current_sum-number, num_idx + 1))
+def solution(nums: List[int]) -> List[List[int]]:
+  results = []
+  prev_elements = []
+  
+  def dfs(elements):
+    if len(elements) == 0:
+      results.append(prev_elements[:])
 
-    return answer
+    for e in elements:
+      next_elements = elements[:]
+      next_elements.remove(e)
 
-print(solution([1,1,1,1,1,] , 3))
+      prev_elements.append(e)
+      dfs(next_elements)
+      prev_elements.pop()
+  dfs(nums)
+  return results
+
+print(solution([1,2,3]))
