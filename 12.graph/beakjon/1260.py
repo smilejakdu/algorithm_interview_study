@@ -1,12 +1,12 @@
 '''
-예제 입력 1 
+예제 입력 1
 4 5 1
 1 2
 1 3
 1 4
 2 4
 3 4
-예제 출력 1 
+예제 출력 1
 1 2 4 3
 1 2 3 4
 
@@ -25,6 +25,7 @@
 graph = {}
 
 import sys
+from collections import deque
 
 input: () = lambda: sys.stdin.readline().strip()
 n, m, v = map(int, input().split())
@@ -44,7 +45,6 @@ while m:
 
 for g in graph:
     graph[g].sort()
-print(graph)
 
 
 def dfs(v, discovered=[]):
@@ -55,4 +55,17 @@ def dfs(v, discovered=[]):
     return discovered
 
 
-print(dfs(3))
+def bfs(v):
+    discovered = [v]
+    dq = deque([v])
+    while dq:
+        v = dq.popleft()
+        for w in graph[v]:
+            if w not in discovered:
+                discovered.append(w)
+                dq.append(w)
+    return discovered
+
+
+print(*dfs(v))
+print(*bfs(v))
