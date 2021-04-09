@@ -15,6 +15,8 @@ Input: nums = [1]
 Output: [[1]]
 '''
 from typing import List
+
+
 def permute(nums: List[int]) -> List[List[int]]:
     results = []
     prev_elements = []
@@ -36,4 +38,5 @@ def permute(nums: List[int]) -> List[List[int]]:
     dfs(nums)
     return results
 
-print(permute([1,2,3]))
+
+print(permute([1, 2, 3]))
