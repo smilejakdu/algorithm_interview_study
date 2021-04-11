@@ -1,27 +1,64 @@
 import sys
+
 graph = {
-  1: [2, 3, 4],
-  2: [5],
-  3: [5],
-  4: [],
-  5: [6, 7],
-  6: [],
-  7:[3],
+    1: [2, 3, 4],
+    2: [5],
+    3: [5],
+    4: [],
+    5: [6, 7],
+    6: [],
+    7: [3],
 }
 discovered = []
 
+
+# 첫번째 풀이
 def recursive_dfs(v, discovered=[]):
-  discovered.append(v)
-  for w in graph[v]:
-    if not w in discovered:
-      discovered = recursive_dfs(w, discovered)
-  return discovered
+    discovered.append(v)
+    for w in graph[v]:
+        if not w in discovered:
+            discovered = recursive_dfs(w, discovered)
+    return discovered
 
 
 print(recursive_dfs(1))
 
 
-# DFS 두번째 예제 
+# 고차함수를 이용한 풀이
+
+def solution(v):
+    discovered = []
+
+    def dfs(v):
+        discovered.append(v)
+        for w in graph[v]:
+            if w not in discovered:
+                dfs(w)
+
+    dfs(v)
+    return discovered
+
+
+print(solution(1))
+
+
+#
+
+def solution(v):
+    discovered = []
+
+    def dfs(v):
+        if v not in discovered:
+            discovered.append(v)
+            return discovered
+        for w in graph[v]:
+            dfs(w)
+
+    dfs(v)
+    return discovered
+
+
+# DFS 두번째 예제
 
 
 input: () = lambda: sys.stdin.readline().strip()
