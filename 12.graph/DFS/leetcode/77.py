@@ -45,3 +45,25 @@ def combine(n, k):
 
 
 print(combine(n, k))
+
+
+# 두번째 풀이
+
+def solution(n, k):
+    results = []
+
+    def dfs(index, elements):
+        if len(elements) == k:
+            results.append(elements[:])
+            return
+        for i in range(index, n + 1):
+            elements.append(i)
+            dfs(i + 1, elements)
+            elements.pop()
+
+    dfs(1, [])
+
+    return results
+
+
+print(solution(n, k))

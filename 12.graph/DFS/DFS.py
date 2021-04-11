@@ -41,23 +41,6 @@ def solution(v):
 
 print(solution(1))
 
-
-#
-
-def solution(v):
-    discovered = []
-
-    def dfs(v):
-        if v not in discovered:
-            discovered.append(v)
-            return discovered
-        for w in graph[v]:
-            dfs(w)
-
-    dfs(v)
-    return discovered
-
-
 # DFS 두번째 예제
 
 
