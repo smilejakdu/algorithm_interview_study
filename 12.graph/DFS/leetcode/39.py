@@ -37,9 +37,14 @@ Output: [[1,1]]
 사실 이문제는 DFS 로 풀지않아도 풀수는 있지만 , DFS 로 풀어보도록 하자 .
 '''
 
-candidates = [2, 3, 6, 7]
-target = 7
+# candidates = [2, 3, 6, 7]
+# target = 7
 
+candidates = [2, 3, 5]
+target = 8
+
+
+# 하나씩 빼면서 result 에 추가하는 방
 
 def combinationSum(candidates, target):
     result = []
@@ -56,6 +61,27 @@ def combinationSum(candidates, target):
             dfs(csum - candidates[i], i, path + [candidates[i]])
 
     dfs(target, 0, [])
+    return result
+
+
+print(combinationSum(candidates, target))
+
+
+# 하나씩 더해서 result 에 추가하는 방법
+def combinationSum(candidates, target):
+    result = []
+
+    def dfs(index, path):
+        if sum(path) == target:
+            result.append(path)
+            return
+        elif sum(path) > target:
+            return
+
+        for i in range(index, len(candidates)):
+            dfs(i, path + [candidates[i]])
+
+    dfs(0, [])
     return result
 
 
