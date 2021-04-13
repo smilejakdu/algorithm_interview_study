@@ -1,4 +1,5 @@
 ''':cvar
+https://www.acmicpc.net/problem/14501
 압력
 7
 3 10
