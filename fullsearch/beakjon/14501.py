@@ -30,17 +30,3 @@ for k, v in diction.items():
     print(k, v)
 
 
-def solution():
-    result = 0
-
-    def dfs(index, ):
-        for i, dic in enumerate(index, diction):
-            print(i, dic)
-
-        return
-
-    dfs(1, )
-    return
-
-
-print(solution())
