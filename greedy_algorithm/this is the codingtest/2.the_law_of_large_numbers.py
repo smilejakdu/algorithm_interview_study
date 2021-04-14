@@ -58,3 +58,28 @@ while True:
     result += second
     m -= 1
 print(result)
+
+# 두번째 풀이
+''':cvar
+가장 큰수 : 6
+두번째로 큰수 : 5
+
+이때 M 이 8 , K 가 3 이라면 
+(6+6+6+5)+(6+6+6+5) = 46
+반복되는 수열에 대해서 파악
+'''
+
+n, m, k = map(int, input().split())
+data = list(map(int, input().split()))
+data.sort()
+first = data[n - 1]
+second = data[n - 2]
+
+count = int(m / (k + 1)) * k  # 가장 큰 수가 등장하는 횟수
+count += m % (k + 1)  # 나누어 떨어지지 않는 경우도 고려
+
+result = 0
+result += count * first
+result += (m - count) * second
+
+print(result)
