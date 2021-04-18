@@ -11,9 +11,11 @@ Explanation: 3is the length of the path [4,2,1,3] or [5,2,1,3].
 Example 2:
 Input: root = [1,2]
 Output: 1
-
-
 '''
+
+from .. import tree_make
+
+root = tree_make.creatBTree([1, 2, 3, 4, 5], 0)
 
 
 class TreeNode:
@@ -45,3 +47,8 @@ class Solution:
         dfs(root)
 
         return self.longest
+
+
+if __name__ == '__main__':
+    solution = Solution()
+    print(solution.diameterOfBinaryTree(root))
