@@ -48,3 +48,28 @@ def findCheapestPrice(n, flights, src, dst, K):
 print(findCheapestPrice(n, edges, src, dst, k))
 
 
+# 두번째 풀이
+
+
+def findCheapestPrice(n, flights, src, dst, K):
+    graph = collections.defaultdict(list)
+    for u, v, w in flights:
+        graph[u].append((v, w))
+
+    k = 0
+    Q = [(0, src, K)]  # ( 가격 , 정점 , 남은 가능 경유지 수 )
+
+    # 우선 순위 큐 최소값 기준으로 도착점까지 최소 비용 판별
+    while Q:
+        price, node, k = heapq.heappop(Q)
+        if node == dst:
+            return price
+        if k >= K:
+            k += 1
+            for v, w in graph[node]:
+                alt = price + w
+                heapq.heappush(Q, (alt, v, k))
+    return -1
+
+
+print(findCheapestPrice(n, edges, src, dst, k))
