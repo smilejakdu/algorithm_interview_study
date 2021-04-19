@@ -41,4 +41,15 @@ n = int(sys.stdin.readline())
 data = [sys.stdin.readline().strip() for i in range(n)]
 ```
 
+# 문제 질문 방법
 
+```
+문제 : https://www.acmicpc.net/problem/20061
+코드 : http://colorscripter.com/
+
+백준 20061 모노미노도미노 2 입니다.
+테케, 질문에서 찾은 반례 모두 맞고
+테케 설명에 있는 대로 남은 타일의 갯수 뿐만 아니라 위치까지 정확히 계산됩니다.
+하지만 제출시 틀렸습니다 가 떠서 질문드립니다
+반례 또는 특정 함수를 지적해 주시면 해당부분 다시 구현해 보겠습니다
+```
