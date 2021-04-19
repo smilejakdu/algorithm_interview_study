@@ -13,12 +13,31 @@ Input: root = [1,2]
 Output: 1
 '''
 
-from .. import tree_make
 
-root = tree_make.creatBTree([1, 2, 3, 4, 5], 0)
+class TreeNode1(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 
-class TreeNode:
+def creatBTree(data, index):
+    pNode = None
+    if index < len(data):
+        if data[index] == None:
+            return
+        pNode = TreeNode1(data[index])
+        pNode.left = creatBTree(data, 2 * index + 1)  # [1, 3, 7, 15, ...]
+        pNode.right = creatBTree(data, 2 * index + 2)  # [2, 5, 12, 25, ...]
+    return pNode
+
+
+# lst = [5, 4, 8, 11, None, 13, 4, 7, 2, None, None, None, 1]
+lst = [1, 2, 3, 4, 5]
+root = creatBTree(lst, 0)
+
+
+class TreeNode2:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
@@ -28,8 +47,10 @@ class TreeNode:
 class Solution:
     longest: int = 0
 
-    def diameterOfBinaryTree(self, root: TreeNode) -> int:
-        def dfs(node: TreeNode) -> int:
+    def diameterOfBinaryTree(self, root: TreeNode2) -> int:
+        print(root)
+
+        def dfs(node: TreeNode2) -> int:
             # 리프노드의 left, right 노드를 None으로 초기화하므로 거기까지 타고 갔을때 -1을 리턴됨.
             if not node:
                 return -1
@@ -37,7 +58,7 @@ class Solution:
             # 리프노트 다음 가상노드까지 끝까지 타고 들어감 ( 왼쪽, 오른쪽 각각 리프 노드까지 탐색 )
             left = dfs(node.left)
             right = dfs(node.right)
-
+            print(left, right)
             # 왼쪽, 오른쪽 상태값에 2를 더해서 거리를 구함. 기존 거리에 누적으로 max 값을 측정. ( 가장 긴 경로 )
             self.longest = max(self.longest, left + right + 2)
 
@@ -49,6 +70,5 @@ class Solution:
         return self.longest
 
 
-if __name__ == '__main__':
-    solution = Solution()
-    print(solution.diameterOfBinaryTree(root))
+solution = Solution()
+print(solution.diameterOfBinaryTree(root))

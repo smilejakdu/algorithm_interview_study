@@ -16,5 +16,10 @@ def creatBTree(data, index):
     return pNode
 
 
-# lst = [5, 4, 8, 11, None, 13, 4, 7, 2, None, None, None, 1]
-# root = creatBTree(lst, 0)
+def print_tree(object):
+    return object.val
+
+
+lst = [5, 4, 8, 11, None, 13, 4, 7, 2, None, None, None, 1]
+root = creatBTree(lst, 0)
+print(print_tree(root))
