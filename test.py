@@ -1,24 +1,31 @@
 import sys
-import collections
-
 
 # N = int(sys.stdin.readline())
 # a, b, c = map(int, sys.stdin.readline().split())
 
-def solution(bridge_length, weight, truck_weights):
-    queue = collections.deque([0] * bridge_length)
-    truck_list = collections.deque(truck_weights)
-    time = 0
+import collections
 
-    while queue:
-        time += 1
-        queue.popleft()
-        if truck_list:
-            if sum(queue) + truck_list[0] <= weight:
-                queue.append(truck_list.popleft())
+
+def solution(priorities, location):
+    queue = collections.deque(priorities)
+    count = 0
+
+    while len(queue) != 0:
+        max_pri = max(queue)
+        if location == 0:
+            if queue[0] < max_pri:
+                queue.rotate(-1)
+                location = len(queue) - 1
             else:
-                queue.append(0)
-    return time
+                return count + 1
+        else:
+            if queue[0] < max_pri:
+                queue.rotate(-1)
+                location -= 1
+            else:
+                queue.popleft()
+                location -= 1
+                count += 1
 
 
-print(solution(2, 10, [7, 4, 5, 6]))
+print(solution([1, 1, 9, 1, 1, 1], 0))
