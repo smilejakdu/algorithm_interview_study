@@ -1,19 +1,41 @@
-from typing import List
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 
 class Solution:
-    def productExceptSelf(self, nums: List[int]) -> List[int]:
-        out = []
-        p = 1
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        if (not l1) or (l2 and l1.val > l2.val):
+            l1, l2 = l2, l1
+        if l1:
+            l1.next = self.mergeTwoLists(l1.next, l2)
+        return l1
 
-        # 왼쪽 곱셈
-        for i in range(0, len(nums)):
-            out.append(p)
-            p = p * nums[i]
 
-        p = 1
-        # 왼쪽 곱셈 결과에 오른쪽 값을 차례대로 곱셈
-        for i in range(len(nums) - 1, -1, -1):
-            out[i] = out[i] * p
-            p = p * nums[i]
-        return out
+def printAll(head):
+    result_list = []
+    start = head
+
+    while start:
+        result_list.append(start.val)
+        start = start.next
+    print(result_list)
+
+
+# 1->2->4 , 1->3->4
+l1_1 = ListNode(1)
+l1_2 = ListNode(2)
+l1_3 = ListNode(4)
+l1_1.next = l1_2
+l1_2.next = l1_3
+
+l2_1 = ListNode(1)
+l2_2 = ListNode(3)
+l2_3 = ListNode(4)
+l2_1.next = l2_2
+l2_2.next = l2_3
+
+solution = Solution()
+result = solution.mergeTwoLists(l1_1, l2_1)
+printAll(result)
