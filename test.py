@@ -1,16 +1,18 @@
 class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 
 class Solution:
-    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-        if (not l1) or (l2 and l1.val > l2.val):
-            l1, l2 = l2, l1
-        if l1:
-            l1.next = self.mergeTwoLists(l1.next, l2)
-        return l1
+    def reverseList(self, head: ListNode) -> ListNode:
+        def reverse(node: ListNode, prev: ListNode = None):
+            if not node:
+                return prev
+            next, node.next = node.next, prev
+            return reverse(next, node)
+
+        return reverse(head)
 
 
 def printAll(head):
@@ -26,16 +28,15 @@ def printAll(head):
 # 1->2->4 , 1->3->4
 l1_1 = ListNode(1)
 l1_2 = ListNode(2)
-l1_3 = ListNode(4)
+l1_3 = ListNode(3)
+l1_4 = ListNode(4)
+l1_5 = ListNode(5)
+
 l1_1.next = l1_2
 l1_2.next = l1_3
-
-l2_1 = ListNode(1)
-l2_2 = ListNode(3)
-l2_3 = ListNode(4)
-l2_1.next = l2_2
-l2_2.next = l2_3
+l1_3.next = l1_4
+l1_4.next = l1_5
 
 solution = Solution()
-result = solution.mergeTwoLists(l1_1, l2_1)
+result = solution.reverseList(l1_1)
 printAll(result)
