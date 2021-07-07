@@ -3,21 +3,26 @@ from typing import List
 
 # Definition for singly-linked list.
 class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 
 class Solution:
-    # 연결 리스트 뒤집기
-    def reverseList(self, head: ListNode) -> ListNode:
-        node, prev = head, None
-
-        while node:
-            next, node.next = node.next, prev
-            prev, node = node, next
-
-        return prev
+    def swapPairs(self, head: ListNode) -> ListNode:
+        linklist_to_list = self.toList(head)
+        len_linklist_to_list = len(linklist_to_list)
+        if len_linklist_to_list % 2 == 0:
+            front = linklist_to_list[:len(linklist_to_list) // 2]
+            back = linklist_to_list[len(linklist_to_list) // 2:]
+            result = sorted(front, reverse=True) + sorted(back, reverse=True)
+            return self.toReversedLinkedList(result)
+        else:
+            front = linklist_to_list[:len(linklist_to_list) // 2]
+            back = linklist_to_list[len(linklist_to_list) // 2 + 1:]
+            sorted(front) + sorted(back)
+        print(front)
+        print(back)
 
     # 연결 리스트를 파이썬 리스트로 변환
     def toList(self, node: ListNode) -> List:
@@ -28,7 +33,7 @@ class Solution:
         return list
 
     # 파이썬 리스트를 연결 리스트로 변환
-    def toReversedLinkedList(self, result: str) -> ListNode:
+    def toReversedLinkedList(self, result: List) -> ListNode:
         prev: ListNode = None
         for r in result:
             node = ListNode(r)
@@ -37,16 +42,6 @@ class Solution:
 
         return node
 
-    # 두 연결 리스트의 덧셈
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        a = self.toList(self.reverseList(l1))
-        b = self.toList(self.reverseList(l2))
-
-        resultStr = int(''.join(str(e) for e in a)) + \
-                    int(''.join(str(e) for e in b))
-
-        # 최종 계산 결과 연결 리스트 변환
-        return self.toReversedLinkedList(str(resultStr))
 
 def printAll(head):
     result_list = []
@@ -57,18 +52,23 @@ def printAll(head):
         start = start.next
     print(result_list)
 
-l1_1 = ListNode(2)
-l1_2 = ListNode(4)
+
+l1_1 = ListNode(1)
+l1_2 = ListNode(2)
 l1_3 = ListNode(3)
+l1_4 = ListNode(4)
+# l1_5 = ListNode(5)
+# l1_6 = ListNode(6)
+# l1_7 = ListNode(7)
+
 l1_1.next = l1_2
 l1_2.next = l1_3
-
-l2_1 = ListNode(5)
-l2_2 = ListNode(6)
-l2_3 = ListNode(4)
-l2_1.next = l2_2
-l2_2.next = l2_3
+l1_3.next = l1_4
+# l1_4.next = l1_5
+# l1_5.next = l1_6
+# l1_6.next = l1_7
 
 solution = Solution()
-result = solution.addTwoNumbers(l1_1 , l2_1)
+result = solution.swapPairs(l1_1)
+# print(result)
 printAll(result)
